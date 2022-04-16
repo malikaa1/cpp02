@@ -13,14 +13,14 @@ public:
 
     int getRawBits(void) const;
     void setRawBits(int const raw);
-    void operator=(const Fixed& fixed);
-    float toFloat( void ) const;
-    int toInt( void ) const;
-    friend std::ostream &operator<<(std::ostream &output, const Fixed &f);
+    Fixed &operator=(const Fixed &fixed);
+    float toFloat(void) const;
+    int toInt(void) const;
 
 private:
     int value;
     static const int fractional_bits = 8;
-
 };
+std::ostream &operator<<(std::ostream &output, const Fixed &f);
+
 #endif

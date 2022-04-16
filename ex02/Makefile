@@ -6,7 +6,7 @@
 #    By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 12:08:31 by mrahmani          #+#    #+#              #
-#    Updated: 2022/04/06 12:10:50 by mrahmani         ###   ########.fr        #
+#    Updated: 2022/04/16 23:17:47 by mrahmani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS	=	main.cpp Fixed.cpp
 
 OBJS	=	${SRCS:.cpp=.o}
 
-CC	=	clang++
+CC	=	c++
 
 RM	=	rm -f
 

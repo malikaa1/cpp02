@@ -52,10 +52,11 @@ Fixed::Fixed(const Fixed &a)
    *this = a;
 }
 
-void Fixed::operator=(const Fixed &fixed)
+Fixed &Fixed::operator=(const Fixed &fixed)
 {
     std::cout << "Copy assignment operator called" << std::endl;
     this->value = fixed.value;
+    return *this;
 }
 
 std::ostream &operator<<(std::ostream &output, const Fixed &f)

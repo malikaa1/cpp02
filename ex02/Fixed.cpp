@@ -6,6 +6,11 @@ Fixed::Fixed(void)
     this->value = 0;
 }
 
+Fixed::Fixed(const Fixed &a)
+{
+    *this = a;
+}
+
 Fixed::Fixed(const int v)
 {
     this->value = v << this->fractional_bits;
@@ -31,6 +36,12 @@ Fixed::~Fixed()
     return;
 }
 
+Fixed &Fixed::operator=(const Fixed &fixed)
+{
+    this->value = fixed.value;
+    return *this;
+}
+
 void Fixed::setRawBits(int const raw)
 {
     this->value = raw;
@@ -41,80 +52,70 @@ int Fixed::getRawBits(void) const
     return this->value;
 }
 
-Fixed::Fixed(const Fixed &a)
-{
-    this->value = a.value;
-}
-
-void Fixed::operator=(const Fixed &fixed)
-{
-    this->value = fixed.value;
-}
-
 std::ostream &operator<<(std::ostream &output, const Fixed &f)
 {
     output << f.toFloat();
     return output;
 }
 
-bool operator<(const Fixed &a, const Fixed &b)
+bool Fixed::operator>(const Fixed &inst) const
 {
-    return (a.getRawBits() < b.getRawBits());
+    return (this->value > inst.value);
 }
 
-bool operator<=(const Fixed &a, const Fixed &b)
+bool Fixed::operator<(const Fixed &inst) const
 {
-    return (a.getRawBits() <= b.getRawBits());
-}
-bool operator>(const Fixed &a, const Fixed &b)
-{
-    return (a.getRawBits() > b.getRawBits());
+    return (inst.value > this->value);
 }
 
-bool operator>=(const Fixed &a, const Fixed &b)
+bool Fixed::operator>=(const Fixed &inst) const
 {
-    return (a.getRawBits() >= b.getRawBits());
-}
-bool operator==(const Fixed &a, const Fixed &b)
-{
-    return (a.getRawBits() == b.getRawBits());
+    return (this->value >= inst.value);
 }
 
-bool operator!=(const Fixed &a, const Fixed &b)
+bool Fixed::operator<=(const Fixed &inst) const
 {
-    return (a.getRawBits() != b.getRawBits());
+    return (this->value <= inst.value);
 }
 
-Fixed operator+(const Fixed &a, const Fixed &b)
+bool Fixed::operator==(const Fixed &inst) const
 {
-    Fixed result;
-    result.setRawBits((a.getRawBits() + b.getRawBits()) >> b.fractional_bits);
-    return result;
+    return (inst.value == this->value);
 }
 
-Fixed operator-(const Fixed &a, const Fixed &b)
+bool Fixed::operator!=(const Fixed &inst) const
 {
-    Fixed result;
-    result.setRawBits((a.getRawBits() - b.getRawBits()) >> b.fractional_bits);
-    return result;
+    return (inst.value != this->value);
 }
 
-Fixed operator*(const Fixed &a, const Fixed &b)
+Fixed Fixed::operator*(Fixed const &inst) const
 {
-    Fixed result;
-    result.setRawBits((a.getRawBits() * b.getRawBits()) >> b.fractional_bits);
-    return result;
+    Fixed res(this->toFloat() * inst.toFloat());
+    return (res);
+}
+Fixed Fixed::operator+(Fixed const &inst) const
+{
+    Fixed res(this->toFloat() + inst.toFloat());
+    return (res);
+}
+Fixed Fixed::operator-(Fixed const &inst) const
+{
+    Fixed res(this->toFloat() - inst.toFloat());
+    return (res);
 }
 
-Fixed operator/(const Fixed &a, const Fixed &b)
+Fixed Fixed::operator/(Fixed const &inst) const
 {
-    Fixed result;
-
-    if (b.getRawBits() == 0)
-        return result;
-
-    result.setRawBits((a.getRawBits() / b.getRawBits()) >> b.fractional_bits);
-    return result;
+    if (inst.toFloat() != 0)
+    {
+        Fixed res(this->toFloat() / inst.toFloat());
+        return (res);
+    }
+    else
+    {
+        std::cout << "sorry you cannot make a division with 0 " << std::endl;
+        return 0;
+    }
 }
 
 Fixed Fixed::operator++(int) // a++

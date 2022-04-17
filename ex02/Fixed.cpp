@@ -58,57 +58,57 @@ std::ostream &operator<<(std::ostream &output, const Fixed &f)
     return output;
 }
 
-bool Fixed::operator>(const Fixed &inst) const
+bool Fixed::operator>(const Fixed &fix) const
 {
-    return (this->value > inst.value);
+    return (this->value > fix.value);
 }
 
-bool Fixed::operator<(const Fixed &inst) const
+bool Fixed::operator<(const Fixed &fix) const
 {
-    return (inst.value > this->value);
+    return (fix.value > this->value);
 }
 
-bool Fixed::operator>=(const Fixed &inst) const
+bool Fixed::operator>=(const Fixed &fix) const
 {
-    return (this->value >= inst.value);
+    return (this->value >= fix.value);
 }
 
-bool Fixed::operator<=(const Fixed &inst) const
+bool Fixed::operator<=(const Fixed &fix) const
 {
-    return (this->value <= inst.value);
+    return (this->value <= fix.value);
 }
 
-bool Fixed::operator==(const Fixed &inst) const
+bool Fixed::operator==(const Fixed &fix) const
 {
-    return (inst.value == this->value);
+    return (fix.value == this->value);
 }
 
-bool Fixed::operator!=(const Fixed &inst) const
+bool Fixed::operator!=(const Fixed &fix) const
 {
-    return (inst.value != this->value);
+    return (fix.value != this->value);
 }
 
-Fixed Fixed::operator*(Fixed const &inst) const
+Fixed Fixed::operator*(Fixed const &fix) const
 {
-    Fixed res(this->toFloat() * inst.toFloat());
+    Fixed res(this->toFloat() * fix.toFloat());
     return (res);
 }
-Fixed Fixed::operator+(Fixed const &inst) const
+Fixed Fixed::operator+(Fixed const &fix) const
 {
-    Fixed res(this->toFloat() + inst.toFloat());
+    Fixed res(this->toFloat() + fix.toFloat());
     return (res);
 }
-Fixed Fixed::operator-(Fixed const &inst) const
+Fixed Fixed::operator-(Fixed const &fix) const
 {
-    Fixed res(this->toFloat() - inst.toFloat());
+    Fixed res(this->toFloat() - fix.toFloat());
     return (res);
 }
 
-Fixed Fixed::operator/(Fixed const &inst) const
+Fixed Fixed::operator/(Fixed const &fix) const
 {
-    if (inst.toFloat() != 0)
+    if (fix.toFloat() != 0)
     {
-        Fixed res(this->toFloat() / inst.toFloat());
+        Fixed res(this->toFloat() / fix.toFloat());
         return (res);
     }
     else
